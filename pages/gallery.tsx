@@ -17,6 +17,10 @@ interface GalleryImage {
   order: number;
 }
 
+type EditableGalleryImage = Partial<GalleryImage> & {
+  newImage?: File
+}
+
 export default function Gallery() {
   const { user, supabase } = useAuth();
   const [images, setImages] = useState<GalleryImage[]>([]);
@@ -103,14 +107,20 @@ export default function Gallery() {
     if (!editingImage) return;
 
     try {
-      const imageData = { ...editingImage };
+      type EditableImage = Partial<GalleryImage> & {
+        newImage?: File
+      }
       
-      if (editingImage.newImage instanceof File) {
-        const imageUrl = await handleImageUpload(editingImage.newImage);
+      const editableImage = editingImage as EditableGalleryImage
+      const imageData = { ...editableImage }
+      
+      if (editableImage.newImage instanceof File) {
+        const imageUrl = await handleImageUpload(editableImage.newImage)
         if (imageUrl) {
-          imageData.image_url = imageUrl;
+          imageData.image_url = imageUrl
         }
       }
+      
 
       delete (imageData as any).newImage;
 
@@ -171,6 +181,8 @@ export default function Gallery() {
       </div>
     );
   }
+
+  const editableImage = editingImage as EditableGalleryImage;
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -309,7 +321,8 @@ export default function Gallery() {
                     e.currentTarget.style.display = 'none';
                   }}
                 />
-                {!editingImage?.image_url && !editingImage?.newImage && (
+                
+                {!editableImage?.image_url && !editableImage?.newImage && (
                   <div className="absolute inset-0 flex items-center justify-center bg-gray-100 rounded-lg">
                     <ImageIcon className="h-8 w-8 text-gray-400" />
                   </div>

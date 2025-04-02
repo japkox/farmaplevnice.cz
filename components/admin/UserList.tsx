@@ -92,7 +92,7 @@ export function UserList({ users, searchQuery, onSearchChange, onToggleAdmin }: 
       if (!session) throw new Error('No active session');
 
       const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-user`,
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/admin-user`,
         {
           method: 'POST',
           headers: {

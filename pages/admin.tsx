@@ -339,7 +339,7 @@ export default function AdminDashboard() {
   
       setProducts(products.map((p: Product) =>
         p.id === productId ? { ...p, disabled } : p
-      ));
+      ) as AdminProduct[]);
       toast.success(`Produkt byl ${disabled ? 'deaktivován' : 'aktivován'}`);
     } catch (err) {
       console.error(`Chyba při ${action} produktu:`, err);

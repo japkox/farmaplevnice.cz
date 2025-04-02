@@ -1,27 +1,41 @@
-import { InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from "react";
+import { InputHTMLAttributes, TextareaHTMLAttributes, ReactNode, } from "react"
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  error?: string;
-  icon?: ReactNode;
-  as?: 'input' | 'textarea';
-  rows?: number;
+type CommonProps = {
+  label?: string
+  error?: string
+  icon?: ReactNode
+  className?: string
 }
 
-export function Input({ 
-  label, 
-  error, 
-  icon, 
-  className = '', 
-  as = 'input',
-  rows = 3,
-  ...props 
-}: InputProps) {
-  const baseInputClasses = "w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 px-3";
-  const heightClasses = "h-12";
-  const iconClasses = icon ? 'pl-10' : '';
-  const errorClasses = error ? 'border-red-300' : '';
-  
+type InputProps = {
+  as?: "input"
+} & InputHTMLAttributes<HTMLInputElement> &
+  CommonProps
+
+type TextareaProps = {
+  as: "textarea"
+  rows?: number
+} & TextareaHTMLAttributes<HTMLTextAreaElement> &
+  CommonProps
+
+type Props = InputProps | TextareaProps
+
+export function Input(props: Props) {
+  const {
+    label,
+    error,
+    icon,
+    className = "",
+    as = "input",
+    ...rest
+  } = props
+
+  const baseInputClasses =
+    "w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+  const heightClasses = "h-12"
+  const iconClasses = icon ? "pl-10" : ""
+  const errorClasses = error ? "border-red-300" : ""
+
   return (
     <div className="w-full">
       {label && (
@@ -35,22 +49,26 @@ export function Input({
             {icon}
           </div>
         )}
-        {as === 'textarea' ? (
-          <textarea
-            className={`${baseInputClasses} ${errorClasses} ${className} resize-none px-3`}
-            rows={rows}
-            {...(props as TextareaHTMLAttributes<HTMLTextAreaElement>)}
-          />
+
+        {as === "textarea" ? (
+          (() => {
+            const { rows = 3, ...textareaProps } = rest as TextareaProps
+            return (
+              <textarea
+                className={`${baseInputClasses} ${errorClasses} ${className} resize-none px-3`}
+                rows={rows}
+                {...textareaProps}
+              />
+            )
+          })()
         ) : (
           <input
             className={`${baseInputClasses} ${heightClasses} ${iconClasses} ${errorClasses} ${className}`}
-            {...props}
+            {...(rest as InputHTMLAttributes<HTMLInputElement>)}
           />
         )}
       </div>
-      {error && (
-        <p className="mt-1 text-sm text-red-600">{error}</p>
-      )}
+      {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
     </div>
-  );
+  )
 }
