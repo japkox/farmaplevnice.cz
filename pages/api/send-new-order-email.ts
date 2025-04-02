@@ -11,7 +11,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { to, orderId, items, price, customer_name, delivery_method, address, city, state, zip} = req.body
 
   try {
-    console.log(items)
 
     const response = await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL,

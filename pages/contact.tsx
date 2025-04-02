@@ -30,11 +30,25 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('contact_messages')
         .insert([formData]);
 
       if (error) throw error;
+
+      try {
+        await fetch('/api/send-new-message-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            from: formData.email,
+            subject: formData.subject,
+            content: formData.message
+          })
+        });
+      } catch(e) { }
 
       toast.success('Zpráva byla odeslána!');
       setFormData({ name: '', email: '', subject: '', message: '' });
