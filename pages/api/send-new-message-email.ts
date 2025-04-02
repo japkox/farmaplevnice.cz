@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const { from, subject, content} = req.body
-
+  
   try {
 
     const response = await resend.emails.send({

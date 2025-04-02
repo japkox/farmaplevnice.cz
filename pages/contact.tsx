@@ -48,7 +48,7 @@ export default function Contact() {
             content: formData.message
           })
         });
-      } catch(e) { }
+      } catch(e) {  }
 
       toast.success('Zpráva byla odeslána!');
       setFormData({ name: '', email: '', subject: '', message: '' });
