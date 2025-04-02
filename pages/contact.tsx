@@ -51,7 +51,7 @@ export default function Contact() {
       } catch(e) { 
         console.error('Chyba při odesílání emailu:', e);
         toast.error('Chyba při odesílání emailu');
-       }
+      }
 
       toast.success('Zpráva byla odeslána!');
       setFormData({ name: '', email: '', subject: '', message: '' });
