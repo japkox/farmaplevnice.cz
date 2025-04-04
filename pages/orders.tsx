@@ -37,6 +37,7 @@ interface Order {
 const statusTranslations: StatusTranslations = {
   pending: 'Čeká na vyřízení',
   awaiting_payment: 'Čeká na platbu',
+  ready_for_pickup: 'Připraveno k vyzvednutí',
   paid: 'Zaplaceno',
   processing: 'Zpracovává se',
   shipped: 'Odesláno',
@@ -102,6 +103,8 @@ export default function Orders() {
         return 'error';
       case 'awaiting_payment':
         return 'warning';
+      case 'ready_for_pickup':
+        return 'success';
       case 'paid':
         return 'success';
       default:

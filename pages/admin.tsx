@@ -28,6 +28,7 @@ const tabs: TabItem[] = [
 const statusTranslations: StatusTranslations = {
   pending: 'Čeká na vyřízení',
   awaiting_payment: 'Čeká na platbu',
+  ready_for_pickup: 'Připraveno k vyzvednutí',
   paid: 'Zaplaceno',
   processing: 'Zpracovává se',
   shipped: 'Odesláno',

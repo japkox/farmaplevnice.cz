@@ -61,6 +61,7 @@ export function OrderList({
                   options={[
                     { value: 'pending', label: 'Čeká na vyřízení' },
                     { value: 'awaiting_payment', label: 'Čeká na platbu' },
+                    { value: 'ready_for_pickup', label: 'Připraveno k vyzvednutí' },
                     { value: 'paid', label: 'Zaplaceno' },
                     { value: 'processing', label: 'Zpracovává se' },
                     { value: 'shipped', label: 'Odesláno' },
