@@ -1,7 +1,7 @@
 import { useCart } from '../context/CartContext';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { Container } from '../components/layout/Container';
-import { PageHeader } from '../components/layout/PageHeader';
+import { PageHeader } from '../components/layout/Header';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { EmptyState } from '../components/ui/EmptyState';

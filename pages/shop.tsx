@@ -3,7 +3,7 @@ import { ProductCard } from '../components/ProductCard';
 import { Product } from '../lib/types/';
 import { useAuth } from '../context/AuthContext';
 import { Container } from '../components/layout/Container';
-import { PageHeader } from '../components/layout/PageHeader';
+import { PageHeader } from '../components/layout/Header';
 import { Card } from '../components/ui/Card';
 import { Select } from '../components/ui/Select';
 import { Input } from '../components/ui/Input';

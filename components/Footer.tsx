@@ -15,9 +15,9 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Odkazy</h3>
             <ul className="space-y-2">
-              <li><Link href="/shop" className="text-green-200 hover:text-white">E-shop</Link></li>
-              <li><Link href="/gallery" className="text-green-200 hover:text-white">Galerie</Link></li>
+              <li><Link href="/shop" className="text-green-200 hover:text-white">Obchod</Link></li>
               <li><Link href="/contact" className="text-green-200 hover:text-white">Kontakt</Link></li>
+              <li><Link href="/gallery" className="text-green-200 hover:text-white">Galerie</Link></li>
               <li><Link href="/terms" className="text-green-200 hover:text-white">Obchodní podmínky</Link></li>
             </ul>
           </div>

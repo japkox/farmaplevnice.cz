@@ -2,7 +2,7 @@ import { useState, useEffect, FormEvent } from 'react';
 import { X, Plus, Edit, Trash2, ImageIcon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Container } from '../components/layout/Container';
-import { PageHeader } from '../components/layout/PageHeader';
+import { PageHeader } from '../components/layout/Header';
 import { Button } from '../components/ui/Button';
 import { Modal } from '../components/ui/Modal';
 import { Input } from '../components/ui/Input';

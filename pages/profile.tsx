@@ -2,7 +2,7 @@ import { useEffect, useState, FormEvent, ChangeEvent } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { User } from 'lucide-react';
 import { Container } from '../components/layout/Container';
-import { PageHeader } from '../components/layout/PageHeader';
+import { PageHeader } from '../components/layout/Header';
 import { Card } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';

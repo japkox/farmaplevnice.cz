@@ -16,7 +16,7 @@ export function Hero() {
           <p className="text-xl text-white mb-8">
             Tradice, kvalita a udržitelné zemědělství
           </p>
-          <a href="/shop" className="inline-block bg-green-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors">
+          <a href="/shop" className="inline-block bg-green-700 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-green-700 transition-colors">
             Prohlédněte si naše produkty
           </a>
         </div>

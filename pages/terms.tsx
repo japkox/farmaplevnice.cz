@@ -1,5 +1,5 @@
 import { Container } from '../components/layout/Container';
-import { PageHeader } from '../components/layout/PageHeader';
+import { PageHeader } from '../components/layout/Header';
 import { Paragraph } from '../components/ui/Paragraph';
 import { Card } from '../components/ui/Card';
 import { Header } from '../components/ui/Header';

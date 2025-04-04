@@ -35,6 +35,11 @@ export function Services() {
           </div>
         ))}
       </div>
+      <div className="mt-12 text-center">
+        <a href="/contact" className="inline-block bg-green-700 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-green-700 transition-colors">
+          Kontaktujte nás
+        </a>
+      </div>
     </div>
   );
 }

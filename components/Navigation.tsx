@@ -4,12 +4,17 @@ import {useState, useEffect} from 'react';
 import Link from 'next/link';
 import { ShoppingCart, Menu, X, User, Package, Settings, LogOut, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useRouter } from 'next/router';
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const { user, signOut, supabase } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
+
+  const router = useRouter();
+
+  const isActive = (path: string) => router.pathname === path;
 
   useEffect(() => {
     async function checkAdminStatus() {
@@ -37,7 +42,7 @@ export function Navigation() {
   };
 
   return (
-    <nav className="bg-green-800 text-white">
+    <nav className="bg-green-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -48,17 +53,17 @@ export function Navigation() {
           
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <Link href="/" className="hover:bg-green-700 px-3 py-2 rounded-md">Domů</Link>
-              <Link href="/gallery" className="hover:bg-green-700 px-3 py-2 rounded-md">Galerie</Link>
-              <Link href="/contact" className="hover:bg-green-700 px-3 py-2 rounded-md">Kontakt</Link>
-              <Link href="/shop" className="hover:bg-green-700 px-3 py-2 rounded-md">E-shop</Link>
+              <Link href="/" className={`hover:bg-green-800 px-3 py-2 rounded-sm  ${isActive('/') ? 'bg-green-800' : ''}`}>Domů</Link>
+              <Link href="/gallery" className={`hover:bg-green-800 px-3 py-2 rounded-sm  ${isActive('/gallery') ? 'bg-green-800' : ''}`}>Galerie</Link>
+              <Link href="/contact" className={`hover:bg-green-800 px-3 py-2 rounded-sm  ${isActive('/contact') ? 'bg-green-800' : ''}`}>Kontakt</Link>
+              <Link href="/shop" className={`hover:bg-green-800 px-3 py-2 rounded-sm  ${isActive('/shop') ? 'bg-green-800' : ''}`}>Obchod</Link>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             {user ? (
               <>
-                <Link href="/cart" className="hover:bg-green-700 p-2 rounded-md" onClick={closeAllMenus}>
+                <Link href="/cart" className="hover:bg-green-800 p-2 rounded-sm" onClick={closeAllMenus}>
                   <ShoppingCart className="h-6 w-6" />
                 </Link>
                 <div className="relative">
@@ -67,13 +72,13 @@ export function Navigation() {
                       setIsProfileMenuOpen(!isProfileMenuOpen);
                       setIsMenuOpen(false);
                     }}
-                    className="hover:bg-green-700 p-2 rounded-md"
+                    className="hover:bg-green-800 p-2 rounded-sm"
                   >
                     <User className="h-6 w-6" />
                   </button>
                   
                   {isProfileMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-sm shadow-lg py-1 z-10">
                       <Link
                         href="/profile"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -125,7 +130,7 @@ export function Navigation() {
             ) : (
               <Link
                 href="/auth"
-                className="hover:bg-green-700 px-3 py-2 rounded-md flex items-center gap-2"
+                className="hover:bg-green-800 px-3 py-2 rounded-sm flex items-center gap-2"
                 onClick={closeAllMenus}
               >
                 <User className="h-5 w-5" />
@@ -138,7 +143,7 @@ export function Navigation() {
                   setIsMenuOpen(!isMenuOpen);
                   setIsProfileMenuOpen(false);
                 }}
-                className="inline-flex items-center justify-center p-2 rounded-md hover:bg-green-700 focus:outline-none"
+                className="inline-flex items-center justify-center p-2 rounded-sm hover:bg-green-800 focus:outline-none"
               >
                 {isMenuOpen ? (
                   <X className="h-6 w-6" />
@@ -152,12 +157,12 @@ export function Navigation() {
       </div>
 
       {isMenuOpen && (
-        <div className="md:hidden border-t border-green-700">
+        <div className="md:hidden border-t border-green-800">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link href="/" className="block hover:bg-green-700 px-3 py-2 rounded-md"onClick={closeAllMenus}>Domů</Link>
-            <Link href="/contact" className="block hover:bg-green-700 px-3 py-2 rounded-md"onClick={closeAllMenus}>Kontakt</Link>
-            <Link href="/shop" className="block hover:bg-green-700 px-3 py-2 rounded-md" onClick={closeAllMenus}>E-shop</Link>
-            <Link href="/gallery" className="block hover:bg-green-700 px-3 py-2 rounded-md"onClick={closeAllMenus}>Galerie</Link>
+            <Link href="/" className={`block hover:bg-green-800 px-3 py-2 rounded-sm ${isActive('/') ? 'bg-green-800' : ''}`} onClick={closeAllMenus}>Domů</Link>
+            <Link href="/contact" className={`block hover:bg-green-800 px-3 py-2 rounded-sm ${isActive('/contact') ? 'bg-green-800' : ''}`} onClick={closeAllMenus}>Kontakt</Link>
+            <Link href="/shop" className={`block hover:bg-green-800 px-3 py-2 rounded-sm ${isActive('/shop') ? 'bg-green-800' : ''}`} onClick={closeAllMenus}>Obchod</Link>
+            <Link href="/gallery" className={`block hover:bg-green-800 px-3 py-2 rounded-sm ${isActive('/gallery') ? 'bg-green-800' : ''}`} onClick={closeAllMenus}>Galerie</Link>
           </div>
         </div>
       )}

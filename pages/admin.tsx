@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { Package, ShoppingBag, Plus, Search, Users, Mail } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { Container } from '../components/layout/Container';
-import { PageHeader } from '../components/layout/PageHeader';
+import { PageHeader } from '../components/layout/Header';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { LoadingSpinner } from '../components/ui/LoadingSpinner';

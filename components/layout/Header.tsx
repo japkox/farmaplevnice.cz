@@ -1,12 +1,12 @@
 import {ReactNode} from 'react';
 
-interface PageHeaderProps {
+interface HeaderProps {
   title: string;
   description?: string;
   actions?: ReactNode;
 }
 
-export function PageHeader({ title, description, actions }: PageHeaderProps) {
+export function PageHeader({ title, description, actions }: HeaderProps) {
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between">
