@@ -106,11 +106,7 @@ export default function Gallery() {
     e.preventDefault();
     if (!editingImage) return;
 
-    try {
-      type EditableImage = Partial<GalleryImage> & {
-        newImage?: File
-      }
-      
+    try {      
       const editableImage = editingImage as EditableGalleryImage
       const imageData = { ...editableImage }
       
@@ -148,13 +144,13 @@ export default function Gallery() {
       setIsEditModalOpen(false);
       setEditingImage(null);
     } catch (err) {
-      console.error('Error saving image:', err);
-      toast.error('Failed to save image');
+      console.error('Chyba při ukládání fotky:', err);
+      toast.error('Nepodařilo se uložit fotku');
     }
   };
 
   const deleteImage = async (imageId: string) => {
-    if (!window.confirm('Are you sure you want to delete this image?')) return;
+    if (!window.confirm('Opravdu chcete smazat tuto fotku??')) return;
 
     try {
       const { error } = await supabase
