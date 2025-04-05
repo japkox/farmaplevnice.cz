@@ -32,7 +32,7 @@ export function Button({
 
   const componentProps = {
     ...props,
-    ...(to ? { href: to } : {})
+    ...(to ? { href: to } : {}),
     disabled: loading || disabled,
     className: `${baseStyles} ${variantStyles[variant]} ${className}`,
   }
