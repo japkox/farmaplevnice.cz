@@ -101,10 +101,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setError(null);
       setLoading(true);
       
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password});
 
       if (signInError) throw signInError;
       

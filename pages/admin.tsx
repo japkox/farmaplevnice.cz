@@ -67,14 +67,8 @@ export default function AdminDashboard() {
       }
 
       try {
-        const { data, error } = await supabase
-          .from('profiles')
-          .select('is_admin')
-          .eq('id', user.id)
-          .single();
-
+        const { data, error } = await supabase.from('profiles').select('is_admin').eq('id', user.id).single();
         if (error) throw error;
-
         if (!data?.is_admin) {
           router.replace('/');
           return;

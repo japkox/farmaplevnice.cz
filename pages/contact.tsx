@@ -42,11 +42,7 @@ export default function Contact() {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            from: formData.email,
-            subject: formData.subject,
-            content: formData.message
-          })
+          body: JSON.stringify({ from: formData.email, subject: formData.subject, content: formData.message })
         });
       } catch(e) { 
         console.error('Chyba při odesílání emailu:', e);
