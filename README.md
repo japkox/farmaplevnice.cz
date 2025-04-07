@@ -119,3 +119,5 @@ npm run dev
 ```
 
 Aplikace poběží na `http://localhost:3000`.
+
+#### V případě, že se po otevření vyvojářské aplikace zobrazuje pouze bílá stránka, je nutné vypnout AdBlock!
