@@ -69,7 +69,7 @@ export function MessageList({
         {messages.map((message) => (
           <Card key={message.id}>
             <Card.Body>
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
                     <h3 className="font-medium truncate">{message.subject}</h3>
@@ -85,7 +85,7 @@ export function MessageList({
                   </p>
                 </div>
                 
-                <div className="flex items-center gap-2">
+                <div className="flex flex-col sm:flex-row items-center gap-2">
                   <Button
                     variant="secondary"
                     onClick={() => onMarkAsRead(message.id, !message.read)}

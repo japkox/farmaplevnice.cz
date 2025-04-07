@@ -130,11 +130,11 @@ export function Navigation() {
             ) : (
               <Link
                 href="/auth"
-                className="hover:bg-green-800 px-3 py-2 rounded-sm flex items-center gap-2"
+                className="hover:bg-green-800 px-3 py-2 rounded-sm flex items-center gap-2 text-center"
                 onClick={closeAllMenus}
               >
                 <User className="h-5 w-5" />
-                Přihlásit se
+                Přihlášení
               </Link>
             )}
             <div className="md:hidden">
