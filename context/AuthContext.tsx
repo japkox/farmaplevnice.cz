@@ -3,7 +3,7 @@ import { createClient, SupabaseClient, User } from '@supabase/supabase-js';
 
 interface AuthContextType {
   user: User | null;
-  supabase: SupabaseClient;
+  supabase: SupabaseClient | null;
   signUp: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   signIn: (email: string, password: string) => Promise<boolean>;
   signOut: () => Promise<void>;
@@ -25,20 +25,27 @@ function isValidUrl(urlString: string): boolean {
   }
 }
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables. Please connect to Supabase first.');
-}
+let supabase: SupabaseClient | null = null;
 
-if (!isValidUrl(supabaseUrl)) {
-  throw new Error('Invalid Supabase URL format. Please check your environment variables.');
+if (supabaseUrl && supabaseAnonKey && isValidUrl(supabaseUrl)) {
+  supabase = createClient(supabaseUrl, supabaseAnonKey);
+} else {
+  console.warn("Supabase is not configured properly.");
 }
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  if (!supabase) {
+    return (
+      <div className="w-full h-screen flex flex-col items-center justify-center">
+        <h2 className="text-xl font-bold">Není nastaveno propojení se supabase</h2>
+        <p className="text-l">Nastavte proměnné v souboru <code><b>.env</b></code>.</p>
+      </div>
+    );
+  }
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
