@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' })
+    return res.status(405).json({ message: 'Metoda není podporována' })
   }
 
   const { to, orderId, items, price, customer_name, delivery_method, address, city, state, zip} = req.body
@@ -39,6 +39,35 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         </ul>
         <p><strong>Celkem:</strong> ${price} Kč</p> <br>
         <p>Brzy vás budeme kontaktovat s potvrzením o doručení.</p>
+      `,
+    })
+
+    const responseAdmin = await resend.emails.send({
+      from: process.env.RESEND_FROM_EMAIL,
+      to: process.env.RESEND_TO_EMAIL,
+      subject: `Nová objednávka č. ${orderId}`,
+      html: `
+        <h4>Do systému byla zadána nová objednávka!</h4>
+        <p>Číslo objednávky: <strong>${orderId}</strong></p> <br>
+
+        <p>Jméno zákazníka: <strong>${customer_name}</strong></p> <br>
+        <p>Způsob dopravy: ${delivery_method === 'pickup' ? 'Osobní odběr' : 'DPD (99 Kč)'}</p> <br>
+        ${delivery_method !== 'pickup' ? `
+          <p>Adresa: ${address}</p>
+          <p>Město: ${city}</p>
+          <p>Stát: ${state}</p>
+          <p>PSČ: ${zip}</p>
+        ` : ''}
+        
+        <h4>Objednané položky:</h4>
+        <ul style="list-style-type: none; padding: 4px 10px;">
+          ${items.map((item: any) => `
+            <li>
+              ${item.name} (${item.quantity} ${item.unit}) - ${item.price * item.quantity} Kč
+            </li>
+          `).join('')}
+        </ul>
+        <p><strong>Celkem:</strong> ${price} Kč</p> <br>
       `,
     })
 
