@@ -103,7 +103,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       
       const { error: signInError } = await supabase.auth.signInWithPassword({ email, password});
 
-      if (signInError) throw signInError;
+      if (signInError) {
+        if(signInError.message.includes('Email not confirmed')) {
+          setError('Email nebyl potvrzen. Zkontrolujte svou emailovou schránku a potvrďte svůj účet.');
+          return false;
+        } else 
+        throw signInError;
+      }
       
       return true;
     } catch (err) {

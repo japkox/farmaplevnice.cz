@@ -114,7 +114,7 @@ export default function Auth() {
       if (isSignUp) {
         const { success, error } = await signUp(email, password);
         if (success) {
-          setCooldown(60);
+          setCooldown(5);
           toast.success('Registrace byla úspěšná, můžete se přihlásit.', {
             icon: '✓'
           });

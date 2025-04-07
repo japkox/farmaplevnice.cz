@@ -31,7 +31,7 @@ export function Input(props: Props) {
   } = props
 
   const baseInputClasses =
-    "w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+    "w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 px-2"
   const heightClasses = "h-12"
   const iconClasses = icon ? "pl-10" : ""
   const errorClasses = error ? "border-red-300" : ""
