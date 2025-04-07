@@ -139,7 +139,7 @@ export default function Shop() {
               />
 
               <Select
-                label="Sort By"
+                label="Seřadit podle"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
                 options={[
