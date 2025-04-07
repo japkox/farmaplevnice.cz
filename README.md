@@ -73,7 +73,7 @@ a tyto hodnoty přidejte do souboru .env
 #### 3. Import SQL databáze
 
 1. V levém panelu přejděte na **SQL Editor**
-2. Vložte celý obsah `db.sql` souboru, který se nachází v projektu 
+2. Vložte celý obsah souboru `db.sql`, který se nachází v projektu 
 3. Spusťte skript kliknutím na **"RUN"**
 
 ### 4. Vypnutí ověřování e-mailu
