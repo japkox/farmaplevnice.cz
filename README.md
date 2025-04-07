@@ -1,6 +1,6 @@
 # Webová aplikce s eshopem
 
-Tento projekt je moderní e-commerce webová aplikace postavená na frameworku **Next.js** s použitím **TypeScriptu**, **Tailwind CSS** a **Resend** pro odesílání emailů. Obsahuje jak veřejnou část pro zákazníky, tak administrační rozhraní pro správu obsahu.
+Tento projekt je moderní webová aplikace postavená na frameworku **Next.js** s použitím **TypeScriptu**, **Tailwind CSS** a **Resend** pro odesílání emailů. Obsahuje jak veřejnou část pro zákazníky, tak administrační rozhraní pro správu obsahu.
 
 ## Předpoklady
 
