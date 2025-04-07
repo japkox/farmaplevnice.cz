@@ -4,9 +4,9 @@ Tento projekt je moderní e-commerce webová aplikace postavená na frameworku *
 
 ## Předpoklady
 
-Mít nainstalované [Node.js a NPM](https://nodejs.org/en)
-Vytvořený účet na [Supabase](https://supabase.com/)
-Vytvořený projekt na Supabase (viz níže)
+- Mít nainstalované [Node.js a NPM](https://nodejs.org/en)
+- Vytvořený účet na [Supabase](https://supabase.com/)
+- Vytvořený projekt na Supabase (viz níže)
 
 ## Technologie
 
@@ -108,7 +108,7 @@ Administrátorská práva lze nastavít přímo v databázi v Supabase
 1. V levém panelu přejděte na **Table Editor**
 2. Přejděte na schéma **public**
 3. Vyberte tabulku **profiles**
-4. Nastavte hodnojtu `is_admin` na `true` pro uživatele, kterému chcete udělit administrátorská práva
+4. Nastavte hodnotu `is_admin` na `true` pro uživatele, kterému chcete udělit administrátorská práva
 
 Pro další uživatele lze nastavit práva i přes administrační rozhraní aplikace
 
