@@ -1,9 +1,10 @@
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Download } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { Select } from '../ui/Select';
 import { EmptyState } from '../ui/EmptyState';
 import { Package } from 'lucide-react';
 import { AdminOrder } from '../../lib/types';
+import 'jspdf-autotable';
 
 interface OrderListProps {
   orders: AdminOrder[];
@@ -20,6 +21,21 @@ export function OrderList({
   updateOrderStatus,
   formatDate 
 }: OrderListProps) {
+
+  const downloadOrderPDF = async (order: AdminOrder) => {
+    const res = await fetch('/api/export-order-pdf', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(order),
+    });
+  
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `objednavka_${order.order_number}.pdf`;
+    link.click();
+  };  
 
   if (orders.length === 0) {
     return (
@@ -54,7 +70,7 @@ export function OrderList({
                 </div>
               </div>
               
-              <div className="flex items-center justify-between sm:justify-end gap-4">
+              <div className="flex items-center justify-between sm:justify-end gap-5">
                 <Select
                   value={order.status}
                   onChange={(e) => updateOrderStatus(order.id, e.target.value)}
@@ -70,6 +86,14 @@ export function OrderList({
                   ]}
                   className="min-w-[140px]"
                 />
+                <button
+                  onClick={() => downloadOrderPDF(order)}
+                  className="text-green-600 hover:text-green-700"
+                >
+                  <Download 
+                    className={`h-6 w-6`}
+                  />
+                </button>
                 <button
                   onClick={() => setExpandedOrder(expandedOrder === order.id ? null : order.id)}
                   className="text-green-600 hover:text-green-700"
