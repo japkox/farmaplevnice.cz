@@ -5,12 +5,14 @@ import Link from 'next/link';
 import { ShoppingCart, Menu, X, User, Package, Settings, LogOut, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/router';
+import { useCart } from '../context/CartContext';
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const { user, signOut, supabase } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
+  const { state: cartState } = useCart();
 
   const router = useRouter();
 
@@ -63,8 +65,13 @@ export function Navigation() {
           <div className="flex items-center gap-4">
             {user ? (
               <>
-                <Link href="/cart" className="hover:bg-green-800 p-2 rounded-sm" onClick={closeAllMenus}>
+                <Link href="/cart" className="relative hover:bg-green-800 p-2 rounded-sm" onClick={closeAllMenus}>
                   <ShoppingCart className="h-6 w-6" />
+                  {cartState.items.length > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                      {cartState.items.length}
+                    </span>
+                  )}
                 </Link>
                 <div className="relative">
                   <button
