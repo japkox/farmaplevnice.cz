@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Trash2, Save, X, Shield, ShieldOff } from 'lucide-react';
+import { Search, Trash2, Save, X, Shield, ShieldOff, FilePen } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
@@ -24,7 +24,7 @@ export function UserList({ users, searchQuery, onSearchChange, onToggleAdmin }: 
   const [showRemoveAdminConfirm, setShowRemoveAdminConfirm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
-  const { supabase } = useAuth();
+  const { user, supabase } = useAuth();
 
   const loadUserDetails = async (userId: string) => {
     setIsLoadingDetails(true);
@@ -192,7 +192,7 @@ export function UserList({ users, searchQuery, onSearchChange, onToggleAdmin }: 
                     variant="secondary"
                     onClick={() => loadUserDetails(user.id)}
                   >
-                    Zobrazit detaily
+                    <FilePen />
                   </Button>
                 </div>
               </div>
@@ -325,9 +325,10 @@ export function UserList({ users, searchQuery, onSearchChange, onToggleAdmin }: 
             <div className="border-t pt-4 mt-6">
               <div className="flex flex-col md:flex-row gap-2 justify-center md:justify-start">
                 <Button
-                  variant={selectedUser.is_admin ? 'danger' : 'secondary'}
+                  variant={selectedUser.is_admin ? 'danger' : 'primary'}
                   onClick={() => handleToggleAdmin(selectedUser.id, selectedUser.is_admin)}
                   icon={selectedUser.is_admin ? <ShieldOff className="h-5 w-5" /> : <Shield className="h-5 w-5" />}
+                  disabled={selectedUser.id === user.id}
                 >
                   {selectedUser.is_admin ? 'Odebrat admina' : 'Povýšit'}
                 </Button>

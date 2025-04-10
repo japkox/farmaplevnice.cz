@@ -1,4 +1,4 @@
-import { Edit, Trash2, Plus, ShoppingBag } from 'lucide-react';
+import { Edit, ShoppingBag, EyeOff, Eye } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
@@ -69,7 +69,7 @@ export function ProductList({ products, onEdit, onDisable }: ProductListProps) {
                 <Button
                   variant={product.disabled ? 'primary' : 'danger'}
                   onClick={() => onDisable(product.id, !product.disabled)}
-                  icon={product.disabled ? <Plus className="h-5 w-5" /> : <Trash2 className="h-5 w-5" />}
+                  icon={product.disabled ? <Eye className="h-5 w-5" /> : <EyeOff className="h-5 w-5" />}
                 >
                   {product.disabled ? 'Aktivovat' : 'Deaktivovat'}
                 </Button>

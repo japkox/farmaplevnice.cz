@@ -8,6 +8,7 @@ import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
 import { LoadingSpinner } from '../components/ui/LoadingSpinner';
 import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 interface Profile {
   id: string;
@@ -21,15 +22,21 @@ interface Profile {
 }
 
 export default function Profile() {
-  const { user, supabase } = useAuth();
+  const { user, supabase, loading } = useAuth();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     async function loadProfile() {
-      if (!user) return;
+      if(loading) return;
+
+      if (!user) {
+        router.replace('/auth');
+        return;
+      }
 
       try {
         const { data, error } = await supabase
@@ -49,7 +56,7 @@ export default function Profile() {
     }
 
     loadProfile();
-  }, [user, supabase]);
+  }, [user, supabase, loading]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

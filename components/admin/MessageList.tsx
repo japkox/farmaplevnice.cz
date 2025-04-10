@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Search, Check, X } from 'lucide-react';
+import { Mail, Search, Check, X, Eye } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
@@ -97,6 +97,7 @@ export function MessageList({
                     variant="secondary"
                     onClick={() => setSelectedMessage(message)}
                   >
+                    <Eye className="h-5 w-5"/>
                     Zobrazit
                   </Button>
                 </div>

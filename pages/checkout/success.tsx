@@ -3,8 +3,25 @@ import { Container } from '../../components/layout/Container';
 import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useAuth } from '../../context/AuthContext';
 
 export default function CheckoutSuccess() {
+
+  const { user, supabase, loading } = useAuth();
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if(loading) return;
+
+    if (!user) {
+      router.replace('/auth');
+      return;
+    }
+  }, [user, supabase, loading]);
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <Container className="max-w-3xl">

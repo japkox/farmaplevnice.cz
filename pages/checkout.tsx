@@ -41,7 +41,7 @@ export default function Checkout() {
   const [shippingDetails, setShippingDetails] = useState<ShippingDetails>(initialShippingDetails);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { state: cartState, clearCart } = useCart();
-  const { user, supabase } = useAuth();
+  const { user, supabase, loading } = useAuth();
   const router = useRouter()
   const skipRedirectRef = useRef(false)
 
@@ -50,9 +50,15 @@ export default function Checkout() {
       router.replace('/cart')
     }
   }, [cartState.items.length, router])
+
   useEffect(() => {
     async function loadUserProfile() {
-      if (!user) return;
+      if(loading) return;
+
+      if (!user) {
+        router.replace('/auth');
+        return;
+      }
 
       try {
         const { data: profile, error } = await supabase
@@ -83,7 +89,7 @@ export default function Checkout() {
     }
 
     loadUserProfile();
-  }, [user, supabase]);
+  }, [user, supabase, loading]);
 
   const validateShippingDetails = () => {
     const errors: string[] = [];

@@ -6,11 +6,23 @@ import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { EmptyState } from '../components/ui/EmptyState';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 export default function Cart() {
   const { state, updateQuantity, removeFromCart } = useCart();
+  const { user, supabase, loading } = useAuth();
 
   const router = useRouter()
+
+  useEffect(() => {
+    if(loading) return;
+
+    if (!user) {
+      router.replace('/auth');
+      return;
+    }
+  }, [user, supabase, loading]);
 
   const DEFAULT_PRODUCT_IMAGE = "/dummy.jpg";
 

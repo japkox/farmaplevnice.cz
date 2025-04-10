@@ -37,7 +37,7 @@ const statusTranslations: StatusTranslations = {
 };
 
 export default function AdminDashboard() {
-  const { user, supabase } = useAuth();
+  const { user, supabase, loading } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
   const [activeTab, setActiveTab] = useState<'orders' | 'products' | 'categories' | 'users' | 'messages'>('orders');
   const [orders, setOrders] = useState<AdminOrder[]>([]);
@@ -61,6 +61,8 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     async function checkAdminStatus() {
+      if(loading) return;
+
       if (!user) {
         router.replace('/auth');
         return;
@@ -82,7 +84,7 @@ export default function AdminDashboard() {
     }
 
     checkAdminStatus();
-  }, [user, supabase]);
+  }, [user, supabase, loading]);
 
   useEffect(() => {
     async function loadData() {

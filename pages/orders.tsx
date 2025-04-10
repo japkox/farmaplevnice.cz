@@ -8,6 +8,7 @@ import { Badge } from '../components/ui/Badge';
 import { LoadingSpinner } from '../components/ui/LoadingSpinner';
 import { EmptyState } from '../components/ui/EmptyState';
 import { StatusTranslations } from '../lib/types';
+import { useRouter } from 'next/router';
 
 interface OrderItem {
   id: string;
@@ -46,15 +47,21 @@ const statusTranslations: StatusTranslations = {
 };
 
 export default function Orders() {
-  const { user, supabase } = useAuth();
+  const { user, supabase, loading } = useAuth();
   const [orders, setOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     async function loadOrders() {
-      if (!user) return;
+      if(loading) return;
+
+      if (!user) {
+        router.replace('/auth');
+        return;
+      }
 
       try {
         const { data, error } = await supabase
@@ -83,7 +90,7 @@ export default function Orders() {
     }
 
     loadOrders();
-  }, [user, supabase]);
+  }, [user, supabase, loading]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('cs-CZ', {
