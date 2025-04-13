@@ -68,7 +68,8 @@ export function Navigation() {
                 <Link href="/cart" className="relative hover:bg-green-800 p-2 rounded-sm" onClick={closeAllMenus}>
                   <ShoppingCart className="h-6 w-6" />
                   {cartState.items.length > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                    <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs 
+                        font-bold rounded-full h-5 w-5 flex items-center justify-center">
                       {cartState.items.length}
                     </span>
                   )}
