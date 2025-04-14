@@ -729,7 +729,7 @@ for insert
 to authenticated
 with check (
   bucket_id = 'product-images'
-  AND is_current_user_admin()
+  AND public.is_current_user_admin()
 );
 
 create policy "Admins can upload to gallery-images"
@@ -738,7 +738,7 @@ for insert
 to authenticated
 with check (
   bucket_id = 'gallery-images'
-  AND is_current_user_admin()
+  AND public.is_current_user_admin()
 );
 
 --
