@@ -51,7 +51,7 @@ Pro napojení databáze je nutné vytvořit databázi na platformě **[Supabase]
 
 #### 1. Vytvoření projektu na Supabase
 
-1. Přejděte na [https://app.supabase.com/](https://app.supabase.com/)
+1. Přejděte na [Supabase](https://app.supabase.com/)
 2. Přihlaste se nebo si založte účet
 3. Klikněte na **"New Project"**
 4. Vyplňte následující:
